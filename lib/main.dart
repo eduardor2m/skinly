@@ -12,6 +12,7 @@ void main() {
         '/splash': (context) => SplashScreen(),
         '/welcome': (context) => WelcomeScreen(),
         '/home': (context) => HomeScreen(),
+        '/Models': (context) => ModelsScreen(),
       },
     ),
   );

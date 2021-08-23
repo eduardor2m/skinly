@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skinly/screens/Models.dart';
 import 'package:skinly/screens/home.dart';
 import 'package:skinly/screens/splash.dart';
 import 'package:skinly/screens/welcome.dart';

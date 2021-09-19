@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class MyAvatarsScreen extends StatefulWidget {
+  const MyAvatarsScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _MyAvatarsScreenState createState() => _MyAvatarsScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _MyAvatarsScreenState extends State<MyAvatarsScreen> {
   List savedAvatars = [
     'avatar-1.png',
     'avatar-2.png',

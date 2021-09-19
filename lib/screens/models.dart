@@ -8,7 +8,7 @@ class ModelsScreen extends StatefulWidget {
 }
 
 class _ModelsScreenState extends State<ModelsScreen> {
-  List ModelsAvatars = [
+  List modelsAvatars = [
     'img.png',
     'avatar-1.png',
     'avatar-3.png',
@@ -53,6 +53,7 @@ class _ModelsScreenState extends State<ModelsScreen> {
       children: getFormatedAvatars(avatars),
     );
   }
+
   Widget showInstructionMessage(textTab) {
     return Center(
       child: Padding(
@@ -80,9 +81,7 @@ class _ModelsScreenState extends State<ModelsScreen> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  TextSpan(
-                      text:
-                      ' para criar um novo modelo'),
+                  TextSpan(text: ' para criar um novo modelo'),
                 ],
               ),
             ),
@@ -100,9 +99,9 @@ class _ModelsScreenState extends State<ModelsScreen> {
         child: Scaffold(
           appBar: AppBar(
             leading: new IconButton(
-                icon: new Icon(Icons.arrow_back_outlined, color: Colors.black),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
+              icon: new Icon(Icons.arrow_back_outlined, color: Colors.black),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
             backgroundColor: Color(0xffffffff),
             shadowColor: Color.fromRGBO(0, 0, 0, 0),
             titleSpacing: 0,
@@ -112,13 +111,10 @@ class _ModelsScreenState extends State<ModelsScreen> {
                 color: Color(0xff000000),
               ),
             ),
-
-        ),
-          body: (
-              ModelsAvatars.length > 0
-                ? createAvatarGrid(ModelsAvatars)
-                    : showInstructionMessage('Modelos')
           ),
+          body: (modelsAvatars.length > 0
+              ? createAvatarGrid(modelsAvatars)
+              : showInstructionMessage('Modelos')),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skinly/widgets/avatar_widget.dart';
 
 class MyAvatarsScreen extends StatefulWidget {
   const MyAvatarsScreen({Key? key}) : super(key: key);
@@ -21,26 +22,7 @@ class _MyAvatarsScreenState extends State<MyAvatarsScreen> {
     int counter = 0;
 
     while (counter < avatars.length) {
-      result.add(
-        Padding(
-          padding: EdgeInsets.all(10),
-          child: InkWell(
-            onTap: () {
-              // Navigation to info page
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Color(0xffAEAEAE),
-                  width: 1,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-              ),
-              child: Image.asset(avatars[counter]),
-            ),
-          ),
-        ),
-      );
+      result.add(AvatarWidget(avatarImageName: avatars[counter]));
       counter++;
     }
 

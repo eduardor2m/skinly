@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skinly/widgets/avatar_widget.dart';
+import 'package:skinly/shared/avatar_grid.dart';
 
 class MyAvatarsScreen extends StatefulWidget {
   const MyAvatarsScreen({Key? key}) : super(key: key);
@@ -16,65 +16,6 @@ class _MyAvatarsScreenState extends State<MyAvatarsScreen> {
     'avatar-4.png',
   ];
   List unsavedAvatars = ['avatar-5.png'];
-
-  List<Widget> getFormatedAvatars(avatars) {
-    List<Widget> result = [];
-    int counter = 0;
-
-    while (counter < avatars.length) {
-      result.add(AvatarWidget(avatarImageName: avatars[counter]));
-      counter++;
-    }
-
-    return result;
-  }
-
-  Widget createAvatarGrid(avatars) {
-    return GridView.count(
-      crossAxisCount: 2,
-      padding: EdgeInsets.all(15),
-      children: getFormatedAvatars(avatars),
-    );
-  }
-
-  Widget showInstructionMessage(textTab) {
-    return Center(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'Você não tem $textTab',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            SizedBox(height: 10),
-            Text.rich(
-              TextSpan(
-                text: 'Toque em ',
-                children: [
-                  TextSpan(
-                    text: '+ Novo',
-                    style: TextStyle(
-                      color: Color(0xff0077B6),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  TextSpan(
-                      text:
-                          ' no topo da tela para adicionar um novo personagem'),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +49,7 @@ class _MyAvatarsScreenState extends State<MyAvatarsScreen> {
             actions: [
               TextButton(
                 onPressed: () {
-                  // Navigation to "/new" route
+                  Navigator.pushNamed(context, '/choose-model');
                 },
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
@@ -131,10 +72,10 @@ class _MyAvatarsScreenState extends State<MyAvatarsScreen> {
           body: TabBarView(
             children: [
               savedAvatars.length > 0
-                  ? createAvatarGrid(savedAvatars)
+                  ? createAvatarGrid(savedAvatars, '/export')
                   : showInstructionMessage('personagens salvos'),
               unsavedAvatars.length > 0
-                  ? createAvatarGrid(unsavedAvatars)
+                  ? createAvatarGrid(unsavedAvatars, '/export')
                   : showInstructionMessage('rascunhos'),
             ],
           ),

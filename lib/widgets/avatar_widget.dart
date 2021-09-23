@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
 class AvatarWidget extends StatelessWidget {
-  final String avatarImageName;
+  final Widget? child;
+  final String route;
+  final String image;
 
   const AvatarWidget({
     Key? key,
-    required this.avatarImageName,
+    required this.child,
+    required this.route,
+    required this.image,
   }) : super(key: key);
 
   @override
@@ -14,11 +18,7 @@ class AvatarWidget extends StatelessWidget {
       padding: EdgeInsets.all(10),
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(
-            context,
-            '/export',
-            arguments: avatarImageName,
-          );
+          Navigator.pushNamed(context, route, arguments: image);
         },
         child: Container(
           decoration: BoxDecoration(
@@ -28,7 +28,7 @@ class AvatarWidget extends StatelessWidget {
             ),
             borderRadius: BorderRadius.all(Radius.circular(5)),
           ),
-          child: Image.asset(avatarImageName),
+          child: child,
         ),
       ),
     );

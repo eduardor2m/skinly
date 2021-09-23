@@ -10,7 +10,7 @@ void main() {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/models',
+      initialRoute: '/splash',
       routes: {
         '/splash': (context) => SplashScreen(),
         '/welcome': (context) => WelcomeScreen(),

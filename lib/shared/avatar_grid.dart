@@ -14,7 +14,7 @@ List<Widget> getFormatedAvatars(avatars, route) {
             style: TextStyle(fontSize: 24),
           ),
         )
-      : Image.asset(avatars[counter]);
+      : Image.asset('assets/' + avatars[counter]);
 
     result.add(AvatarWidget(
       child: avatarContent,

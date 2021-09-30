@@ -7,6 +7,8 @@ List<Widget> getFormatedAvatars(avatars, route) {
   Widget? avatarContent;
 
   while (counter < avatars.length) {
+    String screenRoute = (avatars[counter] == '') ? '/avatar-informations' : route;
+    
     avatarContent = (avatars[counter] == '')
       ? Center(
           child: Text(
@@ -18,7 +20,7 @@ List<Widget> getFormatedAvatars(avatars, route) {
 
     result.add(AvatarWidget(
       child: avatarContent,
-      route: route,
+      route: screenRoute,
       image: avatars[counter],
     ));
 

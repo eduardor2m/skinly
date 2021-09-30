@@ -6,6 +6,7 @@ import 'package:skinly/screens/splash.dart';
 import 'package:skinly/screens/welcome.dart';
 import 'package:skinly/screens/avatar_informations.dart';
 import 'package:skinly/screens/build_avatar.dart';
+import 'package:skinly/screens/save_avatar.dart';
 
 void main() {
   runApp(
@@ -20,6 +21,7 @@ void main() {
         '/export': (context) => ExportScreen(),
         '/avatar-informations': (context) => AvatarInformationsScreen(),
         '/build-avatar': (context) => BuildAvatarScreen(),
+        '/save-avatar': (context) => SaveAvatarScreen(),
       },
     ),
   );

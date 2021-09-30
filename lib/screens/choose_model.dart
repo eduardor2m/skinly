@@ -37,7 +37,7 @@ class _ModelsScreenState extends State<ModelsScreen> {
               style: TextStyle(color: Color(0xff000000)),
             ),
           ),
-          body: createAvatarGrid(models, '/avatar-informations'),
+          body: createAvatarGrid(models, '/build-avatar'),
         ),
       ),
     );

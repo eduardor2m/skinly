@@ -35,7 +35,7 @@ class _ExportScreenState extends State<ExportScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(avatarImage),
+            Image.asset('assets/' + avatarImage),
             SizedBox(height: 15),
             Text('Nome do Personagem', style: TextStyle(fontSize: 18)),
             SizedBox(height: 25),

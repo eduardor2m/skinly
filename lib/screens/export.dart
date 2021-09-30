@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:skinly/widgets/primary_button_widget.dart';
+import 'package:skinly/widgets/secondary_button_widget.dart';
 
 class ExportScreen extends StatefulWidget {
   @override
@@ -8,93 +10,57 @@ class ExportScreen extends StatefulWidget {
 class _ExportScreenState extends State<ExportScreen> {
   @override
   Widget build(BuildContext context) {
+    String avatarImage = ModalRoute.of(context)!.settings.arguments as String;
+
     return Scaffold(
       appBar: AppBar(
-        leading: new IconButton(
-          icon: new Icon(Icons.arrow_back_outlined, color: Colors.black),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
         backgroundColor: Color(0xffffffff),
         shadowColor: Color.fromRGBO(0, 0, 0, 0),
-        titleSpacing: 0,
         title: Text(
           'Exportar Personagem',
           style: TextStyle(
             color: Color(0xff000000),
           ),
         ),
-      ),
-      body: Center(
-          child: Column(children: [
-        SizedBox(height: 50),
-        Container(
-          width: 200,
-          height: 200,
-          decoration: new BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: const Radius.circular(100.0),
-                topRight: const Radius.circular(100.0),
-                bottomLeft: const Radius.circular(100.0),
-                bottomRight: const Radius.circular(100.0),
-              )),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back),
+          color: Color(0xff000000),
         ),
-        SizedBox(height: 10),
-        Text('Nome do personagem', style: TextStyle(fontSize: 20)),
-        SizedBox(height: 50),
-        Container(
-            width: 300,
-            height: 50,
-            child: OutlinedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                ),
-                onPressed: () {
-                  print('export');
-                },
-                child: Text('JPEG'))),
-        SizedBox(height: 20),
-        Container(
-            width: 300,
-            height: 50,
-            child: OutlinedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                ),
-                onPressed: () {
-                  print('export');
-                },
-                child: Text('PNG'))),
-        SizedBox(height: 20),
-        Container(
-            width: 300,
-            height: 50,
-            child: OutlinedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                ),
-                onPressed: () {
-                  print('export');
-                },
-                child: Text('SVG', style: TextStyle(color: Colors.blue)))),
-        SizedBox(height: 20),
-        Container(
-            width: 300,
-            height: 50,
-            child: OutlinedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.blue),
-                ),
-                onPressed: () {
-                  print('export');
-                },
-                child: Text('Compartilhar',
-                    style: TextStyle(color: Colors.white)))),
-      ])),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(avatarImage),
+            SizedBox(height: 15),
+            Text('Nome do Personagem', style: TextStyle(fontSize: 18)),
+            SizedBox(height: 25),
+            SecondaryButtonWidget(
+              text: 'JPEG',
+              action: () {},
+            ),
+            SizedBox(height: 15),
+            SecondaryButtonWidget(
+              text: 'PNG',
+              action: () {},
+            ),
+            SizedBox(height: 15),
+            SecondaryButtonWidget(
+              text: 'SVG',
+              action: () {},
+            ),
+            SizedBox(height: 15),
+            PrimaryButtonWidget(
+              text: 'Compartilhar',
+              action: () {},
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

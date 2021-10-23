@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:skinly/data/dao/avatar_dao.dart';
+import 'package:skinly/data/models/avatar_model.dart';
 import 'package:skinly/shared/avatar_grid.dart';
 
 class MyAvatarsScreen extends StatefulWidget {
@@ -9,13 +11,30 @@ class MyAvatarsScreen extends StatefulWidget {
 }
 
 class _MyAvatarsScreenState extends State<MyAvatarsScreen> {
-  List savedAvatars = [
-    'avatar-1.png',
-    'avatar-2.png',
-    'avatar-3.png',
-    'avatar-4.png',
-  ];
-  List unsavedAvatars = ['avatar-5.png'];
+  late Future<List<AvatarModel>> savedAvatars;
+  late Future<List<AvatarModel>> unsavedAvatars;
+
+  buildGridView(avatars, route, message) {
+    return FutureBuilder<List<AvatarModel>>(
+      future: avatars,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return (snapshot.data?.length == 0)
+            ? showInstructionMessage(message)
+            : createAvatarGrid(snapshot.data, route);
+        }
+
+        return Center(child: CircularProgressIndicator());
+      }
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    savedAvatars = AvatarDao().loadSavedAvatars();
+    unsavedAvatars = AvatarDao().loadUnsavedAvatars();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,12 +90,8 @@ class _MyAvatarsScreenState extends State<MyAvatarsScreen> {
           ),
           body: TabBarView(
             children: [
-              savedAvatars.length > 0
-                  ? createAvatarGrid(savedAvatars, '/export')
-                  : showInstructionMessage('personagens salvos'),
-              unsavedAvatars.length > 0
-                  ? createAvatarGrid(unsavedAvatars, '/export')
-                  : showInstructionMessage('rascunhos'),
+              buildGridView(savedAvatars, '/export', 'personagens salvos'),
+              buildGridView(unsavedAvatars, '/build-avatar', 'rascunhos'),
             ],
           ),
         ),

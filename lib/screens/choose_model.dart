@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:skinly/data/dao/avatar_dao.dart';
+import 'package:skinly/data/models/avatar_model.dart';
 import 'package:skinly/shared/avatar_grid.dart';
 
 class ModelsScreen extends StatefulWidget {
@@ -9,14 +11,24 @@ class ModelsScreen extends StatefulWidget {
 }
 
 class _ModelsScreenState extends State<ModelsScreen> {
-  List models = [
-    '',
-    'avatar-1.png',
-    'avatar-2.png',
-    'avatar-3.png',
-    'avatar-4.png',
-    'avatar-5.png',
-  ];
+  late Future<List<AvatarModel>> models;
+
+  buildPageBody() {
+    return FutureBuilder<List<AvatarModel>>(
+      future: models,
+      builder: (context, snapshot) {
+        return snapshot.hasData
+          ? createAvatarGrid(snapshot.data, '/build-avatar', haveBlank: true)
+          : Center(child: CircularProgressIndicator());
+      }
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    models = AvatarDao().loadModels();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +49,7 @@ class _ModelsScreenState extends State<ModelsScreen> {
               style: TextStyle(color: Color(0xff000000)),
             ),
           ),
-          body: createAvatarGrid(models, '/build-avatar'),
+          body: buildPageBody(),
         ),
       ),
     );

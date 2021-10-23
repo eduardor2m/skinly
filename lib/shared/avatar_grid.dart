@@ -1,40 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:skinly/data/models/avatar_model.dart';
 import 'package:skinly/widgets/avatar_widget.dart';
 
-List<Widget> getFormatedAvatars(avatars, route) {
+List<Widget> getFormatedAvatars(avatars, route, haveBlank) {
   List<Widget> result = [];
-  int counter = 0;
-  Widget? avatarContent;
-
-  while (counter < avatars.length) {
-    String screenRoute = (avatars[counter] == '') ? '/avatar-informations' : route;
-    
-    avatarContent = (avatars[counter] == '')
-      ? Center(
-          child: Text(
-            'Em branco',
-            style: TextStyle(fontSize: 24),
-          ),
-        )
-      : Image.asset('assets/' + avatars[counter]);
-
+  
+  if (haveBlank) {
     result.add(AvatarWidget(
-      child: avatarContent,
-      route: screenRoute,
-      image: avatars[counter],
+      child: Center(child: Text('Em branco', style: TextStyle(fontSize: 24))),
+      route: '/avatar-informations',
     ));
+  }
 
-    counter++;
+  for (AvatarModel avatar in avatars) {
+    result.add(AvatarWidget(
+      child: Image.network(avatar.url),
+      route: route,
+      avatar: avatar,
+    ));
   }
 
   return result;
 }
 
-Widget createAvatarGrid(avatars, route) {
+Widget createAvatarGrid(avatars, route, { haveBlank = false }) {
   return GridView.count(
     crossAxisCount: 2,
     padding: EdgeInsets.all(15),
-    children: getFormatedAvatars(avatars, route),
+    children: getFormatedAvatars(avatars, route, haveBlank),
   );
 }
 

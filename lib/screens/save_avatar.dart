@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skinly/data/models/avatar_model.dart';
 import 'package:skinly/widgets/input_widget.dart';
 import 'package:skinly/widgets/primary_button_widget.dart';
 
@@ -12,6 +13,8 @@ class SaveAvatarScreen extends StatefulWidget {
 class _SaveAvatarScreenState extends State<SaveAvatarScreen> {
   @override
   Widget build(BuildContext context) {
+    AvatarModel avatar = ModalRoute.of(context)!.settings.arguments as AvatarModel;
+    
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -36,7 +39,7 @@ class _SaveAvatarScreenState extends State<SaveAvatarScreen> {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Image.asset('assets/avatar-1.png')],
+                  children: [Image.network(avatar.url)],
                 ),
                 SizedBox(height: 30),
                 InputWidget(label: 'Nome do personagem'),
@@ -52,7 +55,7 @@ class _SaveAvatarScreenState extends State<SaveAvatarScreen> {
                             children: [
                               Icon(Icons.download_done_outlined, color: Color(0xff2578dd)),
                                 SizedBox(width: 3),
-                              Text('Feminino', style: TextStyle(color: Color(0xff2578dd))),
+                              Text(avatar.genre, style: TextStyle(color: Color(0xff2578dd))),
                             ]
                           ),
                         ),
@@ -68,7 +71,7 @@ class _SaveAvatarScreenState extends State<SaveAvatarScreen> {
                             children: [
                               Icon(Icons.download_done_outlined, color: Color(0xff2578dd)),
                                 SizedBox(width: 3),
-                              Text('Adulto', style: TextStyle(color: Color(0xff2578dd))),
+                              Text(avatar.age, style: TextStyle(color: Color(0xff2578dd))),
                             ]
                           ),
                         ),

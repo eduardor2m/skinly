@@ -14,7 +14,7 @@ class ModelAvatarWidget extends StatelessWidget {
         child: Container(
           child: Padding(
             padding: EdgeInsets.all(10),
-            child: Image.asset('assets/' + image, width: 100, height: 100),
+            child: Image.network(image),
           ),
           decoration: BoxDecoration(
             border: Border.all(

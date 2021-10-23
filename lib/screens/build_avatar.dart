@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:skinly/data/dao/avatar_dao.dart';
+import 'package:skinly/data/models/avatar_model.dart';
 import 'package:skinly/widgets/model_avatar_widget.dart';
 
 class BuildAvatarScreen extends StatefulWidget {
@@ -9,29 +11,44 @@ class BuildAvatarScreen extends StatefulWidget {
 }
 
 class _BuildAvatarScreenState extends State<BuildAvatarScreen> {
-  List<String> modelAvatars = [
-    'avatar-2.png',
-    'avatar-3.png',
-    'avatar-4.png',
-    'avatar-5.png',
-  ];
+  late Future<List<AvatarModel>> models;
 
-  List<Widget> generateModelAvatars() {
-    List<Widget> result = [];
-    int counter = 0;
+  Widget buildModelList() {
+    return FutureBuilder<List<AvatarModel>>(
+      future: models,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          List<Widget> modelsListBody = [];
+          
+          for (AvatarModel avatar in snapshot.data!) {
+            modelsListBody.add(
+              ModelAvatarWidget(image: avatar.url),
+            );
+          }
 
-    while (counter < modelAvatars.length) {
-      result.add(
-        ModelAvatarWidget(image: modelAvatars[counter]),
-      );
-      counter++;
-    }
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: modelsListBody,
+            ),
+          );
+        }
 
-    return result;
+        return Center(child: CircularProgressIndicator());
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    models = AvatarDao().loadModels();
   }
 
   @override
   Widget build(BuildContext context) {
+    AvatarModel avatar = ModalRoute.of(context)!.settings.arguments as AvatarModel;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -41,7 +58,7 @@ class _BuildAvatarScreenState extends State<BuildAvatarScreen> {
         actions: [
           IconButton(
             icon: Icon(Icons.done_outlined, color: Colors.blue),
-            onPressed: () => Navigator.pushNamed(context, '/save-avatar'),
+            onPressed: () => Navigator.pushNamed(context, '/save-avatar', arguments: avatar),
           ),
         ],
         backgroundColor: Color(0xffffffff),
@@ -58,15 +75,10 @@ class _BuildAvatarScreenState extends State<BuildAvatarScreen> {
           children: [
             Expanded(
               child: Center(
-                child: Image.asset('assets/avatar-1.png'),
+                child: Image.network(avatar.url),
               ),
             ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: generateModelAvatars(),
-              ),
-            ),
+            buildModelList(),
           ],
         ),
       ),

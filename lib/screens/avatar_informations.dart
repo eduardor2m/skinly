@@ -64,12 +64,7 @@ class _AvatarInformationsScreenState extends State<AvatarInformationsScreen> {
             ),
             Expanded(child: Container()),
             PrimaryButtonWidget(
-              action: () {
-                Navigator.pushReplacementNamed(
-                  context,
-                  '/build-avatar',
-                );
-              },
+              action: () {},
               text: 'AVANÇAR',
               icon: Icon(Icons.chevron_right_rounded),
             ),

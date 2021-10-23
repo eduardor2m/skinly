@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:skinly/data/models/avatar_model.dart';
 
 class AvatarWidget extends StatelessWidget {
   final Widget? child;
   final String route;
-  final String image;
+  final AvatarModel? avatar;
 
   const AvatarWidget({
     Key? key,
     required this.child,
     required this.route,
-    required this.image,
+    this.avatar,
   }) : super(key: key);
 
   @override
@@ -18,7 +19,7 @@ class AvatarWidget extends StatelessWidget {
       padding: EdgeInsets.all(10),
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, route, arguments: image);
+          Navigator.pushNamed(context, route, arguments: avatar);
         },
         child: Container(
           decoration: BoxDecoration(

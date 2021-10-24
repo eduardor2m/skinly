@@ -31,39 +31,36 @@ Widget createAvatarGrid(avatars, route, { haveBlank = false }) {
   );
 }
 
-Widget showInstructionMessage(textTab) {
-  return Center(
-    child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            'Você não tem $textTab',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          SizedBox(height: 10),
-          Text.rich(
-            TextSpan(
-              text: 'Toque em ',
-              children: [
-                TextSpan(
-                  text: '+ Novo',
-                  style: TextStyle(
-                    color: Color(0xff0077B6),
-                    fontWeight: FontWeight.w600,
-                  ),
+Widget showInstructionMessage(textTab, userName) {
+  return Padding(
+    padding: EdgeInsets.symmetric(horizontal: 25),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          '$userName, você não tem $textTab',
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 15),
+        Text.rich(
+          TextSpan(
+            text: 'Toque em ',
+            children: [
+              TextSpan(
+                text: '+ Novo',
+                style: TextStyle(
+                  color: Color(0xff0077B6),
+                  fontWeight: FontWeight.w600,
                 ),
-                TextSpan(text: ' no topo da tela para adicionar um novo personagem'),
-              ],
-            ),
+              ),
+              TextSpan(text: ' no topo da tela para adicionar um novo personagem'),
+            ],
           ),
-        ],
-      ),
+          style: TextStyle(fontSize: 16),
+          textAlign: TextAlign.center,
+        ),
+      ],
     ),
   );
 }

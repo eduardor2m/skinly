@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skinly/data/dao/user_dao.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -12,8 +13,18 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Future.delayed(Duration(seconds: 2), () {
-      Navigator.pushReplacementNamed(context, '/welcome');
+    Future.delayed(Duration(milliseconds: 1500), () async {
+      var user = await UserDao().getName();
+
+      if (user?.length != 0) {
+        Navigator.pushReplacementNamed(
+          context,
+          '/my-avatars',
+          arguments: user?[0]['name'],
+        );
+      } else {
+        Navigator.pushReplacementNamed(context, '/welcome');
+      }
     });
   }
 

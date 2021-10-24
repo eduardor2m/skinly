@@ -13,6 +13,7 @@ class MyAvatarsScreen extends StatefulWidget {
 class _MyAvatarsScreenState extends State<MyAvatarsScreen> {
   late Future<List<AvatarModel>> savedAvatars;
   late Future<List<AvatarModel>> unsavedAvatars;
+  String userName = '';
 
   buildGridView(avatars, route, message) {
     return FutureBuilder<List<AvatarModel>>(
@@ -20,7 +21,7 @@ class _MyAvatarsScreenState extends State<MyAvatarsScreen> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return (snapshot.data?.length == 0)
-            ? showInstructionMessage(message)
+            ? showInstructionMessage(message, userName)
             : createAvatarGrid(snapshot.data, route);
         }
 
@@ -38,6 +39,8 @@ class _MyAvatarsScreenState extends State<MyAvatarsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    userName = ModalRoute.of(context)!.settings.arguments as String;
+
     return Material(
       child: DefaultTabController(
         length: 2,

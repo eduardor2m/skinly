@@ -53,7 +53,7 @@ class _BuildAvatarScreenState extends State<BuildAvatarScreen> {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.close_outlined, color: Colors.black),
-          onPressed: () => Navigator.pushReplacementNamed(context, '/my-avatars'),
+          onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(

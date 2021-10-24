@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skinly/data/dao/user_dao.dart';
 import 'package:skinly/widgets/input_widget.dart';
 import 'package:skinly/widgets/primary_button_widget.dart';
 
@@ -8,6 +9,17 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  String userName = '';
+
+  void updateUserName(String newValue) {
+    userName = newValue;
+  }
+
+  Future<void> saveUserName() async {
+    await UserDao().saveName(userName);
+    Navigator.pushReplacementNamed(context, '/my-avatars', arguments: userName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -43,15 +55,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 Form(
                   child: Column(
                     children: [
-                      InputWidget(label: 'Seu nome'),
+                      InputWidget(label: 'Seu nome', onChange: updateUserName),
                       SizedBox(height: 100),
                       PrimaryButtonWidget(
-                        action: () {
-                          Navigator.pushReplacementNamed(
-                            context,
-                            '/my-avatars',
-                          );
-                        },
+                        action: () => saveUserName(),
                         text: 'COMEÇAR',
                         icon: Icon(Icons.chevron_right_rounded),
                       ),

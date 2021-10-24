@@ -8,7 +8,7 @@ No Skinly, o usuário escolhe modelos de avatares com aparência humana, podendo
 ## 🎨 Design
 As telas do aplicativo foram desenhadas no [Figma](https://figma.com). Para acessar o design, [clique aqui](https://www.figma.com/file/3obEzGXzreguWa8zk3YAkq/Skinly?node-id=0%3A1).
 
-## 🫂 Equipe
+## 🧑‍🤝‍🧑 Equipe
 - Eduardo Roger ([eduardor2m](https://github.com/eduardor2m));
 - Filipe Alves ([filipealvess](https://github.com/filipealvess));
 - Gabriel de Almeida;

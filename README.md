@@ -10,6 +10,7 @@ As telas do aplicativo foram desenhadas no [Figma](https://figma.com). Para aces
 
 ## 🧑‍🤝‍🧑 Equipe
 - Eduardo Roger ([eduardor2m](https://github.com/eduardor2m));
+- Elias José ([Elias-JLS](https://github.com/Elias-JLS));
 - Filipe Alves ([filipealvess](https://github.com/filipealvess));
 - Gabriel de Almeida;
 - Lucas Emanuel ([Lunmiel](https://github.com/Lunmiel));

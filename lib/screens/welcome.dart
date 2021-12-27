@@ -9,13 +9,12 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  String userName = '';
-
-  void updateUserName(String newValue) {
-    userName = newValue;
-  }
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final userNameController = TextEditingController();
 
   Future<void> saveUserName() async {
+    String userName = userNameController.text;
+
     await UserDao().saveName(userName);
     Navigator.pushReplacementNamed(context, '/my-avatars', arguments: userName);
   }
@@ -39,26 +38,25 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   children: [
                     Text(
                       'Olá!',
-                      style: TextStyle(
-                        fontSize: 48,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: TextStyle(fontSize: 48, fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
                 SizedBox(height: 80),
-                Text(
-                  'Como podemos te chamar?',
-                  style: TextStyle(fontSize: 18),
-                ),
+                Text('Como podemos te chamar?', style: TextStyle(fontSize: 18)),
                 SizedBox(height: 20),
                 Form(
+                  key: _formKey,
                   child: Column(
                     children: [
-                      InputWidget(label: 'Seu nome', onChange: updateUserName),
+                      InputWidget(label: 'Seu nome', controller: userNameController),
                       SizedBox(height: 100),
                       PrimaryButtonWidget(
-                        action: () => saveUserName(),
+                        action: () {
+                          if (_formKey.currentState!.validate()) {
+                            saveUserName();
+                          }
+                        },
                         text: 'COMEÇAR',
                         icon: Icon(Icons.chevron_right_rounded),
                       ),

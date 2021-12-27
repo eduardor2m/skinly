@@ -14,14 +14,10 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     Future.delayed(Duration(milliseconds: 1500), () async {
-      var user = await UserDao().getName();
+      String? userName = await UserDao().getName();
 
-      if (user?.length != 0) {
-        Navigator.pushReplacementNamed(
-          context,
-          '/my-avatars',
-          arguments: user?[0]['name'],
-        );
+      if (userName != null) {
+        Navigator.pushReplacementNamed(context, '/my-avatars', arguments: userName);
       } else {
         Navigator.pushReplacementNamed(context, '/welcome');
       }

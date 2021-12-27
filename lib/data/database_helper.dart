@@ -26,9 +26,6 @@ class DatabaseHelper {
     String sql = 'CREATE TABLE avatars (id INT PRIMARY KEY, name varchar(200), url varchar(200), genre varchar(50), age varchar(50), created_at DATETIME, saved BOOLEAN, model BOOLEAN)';
     await database.execute(sql);
 
-    sql = 'CREATE TABLE user (name varchar(100))';
-    await database.execute(sql);
-
     sql = 'INSERT INTO avatars VALUES ("1", "Ana", "https://cdn4.iconfinder.com/data/icons/occupation-and-people-avatar-vol-2-1/128/woman_report_occupation_female_people_avatar_journalist-128.png", "Feminino", "Adulto", "2021-10-20 19:00:00", 1, 0)';
     await database.execute(sql);
 

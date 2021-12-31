@@ -15,9 +15,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> handleLogin() async {
     String userEmail = userEmailController.text;
-    String userPassword = userPasswordController.text;
+    // String userPassword = userPasswordController.text;
 
-    await UserDao().login(userEmail, userPassword);
+    // await UserDao().login(userEmail, userPassword);
 
     Navigator.pushReplacementNamed(context, '/my-avatars',
         arguments: userEmail);

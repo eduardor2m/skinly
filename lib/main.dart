@@ -8,6 +8,7 @@ import 'package:skinly/screens/welcome.dart';
 import 'package:skinly/screens/avatar_informations.dart';
 import 'package:skinly/screens/build_avatar.dart';
 import 'package:skinly/screens/save_avatar.dart';
+import 'package:skinly/screens/social_networks_screen.dart';
 
 void main() {
   HttpOverrides.global = new MyHttpOverrides();
@@ -24,6 +25,7 @@ void main() {
         '/avatar-informations': (context) => AvatarInformationsScreen(),
         '/build-avatar': (context) => BuildAvatarScreen(),
         '/save-avatar': (context) => SaveAvatarScreen(),
+        '/social': (context) => SocialNetworksScreen(),
       },
     ),
   );
@@ -33,6 +35,7 @@ class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

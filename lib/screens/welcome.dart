@@ -20,8 +20,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     String userEmail = userEmailController.text;
     String userPassword = userPasswordController.text;
 
-    var user =
-        UserModel(name: userName, email: userEmail, password: userPassword);
+    var user = UserModel(
+        name: userName,
+        email: userEmail,
+        password: userPassword,
+        logged: 'true');
 
     await UserDao().insertUser(user);
     Navigator.pushReplacementNamed(context, '/login', arguments: userName);

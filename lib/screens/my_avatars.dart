@@ -4,8 +4,6 @@ import 'package:skinly/data/dao/user_dao.dart';
 import 'package:skinly/data/models/avatar_model.dart';
 import 'package:skinly/shared/avatar_grid.dart';
 
-import '../widgets/primary_button_widget.dart';
-
 class MyAvatarsScreen extends StatefulWidget {
   const MyAvatarsScreen({Key? key}) : super(key: key);
 
@@ -19,8 +17,8 @@ class _MyAvatarsScreenState extends State<MyAvatarsScreen> {
   String userName = '';
 
   Future<void> logout() async {
-    // await UserDao().logout();
-    Navigator.pushReplacementNamed(context, '/welcome');
+    await UserDao().logout();
+    Navigator.pushReplacementNamed(context, '/login');
   }
 
   buildGridView(avatars, route, message) {

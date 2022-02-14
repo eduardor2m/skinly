@@ -60,6 +60,6 @@ class DatabaseHelper {
     await database.execute(sql);
 
     await database.execute(
-        'CREATE TABLE user (id INT PRIMARY KEY, name varchar(200), email varchar(200), password varchar(200))');
+        'CREATE TABLE user (id INT PRIMARY KEY, name varchar(200), email varchar(200), password varchar(200), logged VARCHAR(200))');
   }
 }

@@ -32,6 +32,12 @@ class UserDao {
     final db = await DatabaseHelper().database;
     final List<Map<String, dynamic>> maps = await db!.query('user');
     if (maps.length > 0) {
+      await db.update(
+        'user',
+        {'logged': 'true'},
+        where: 'logged = ?',
+        whereArgs: ['false'],
+      );
       return maps[0]['email'] == userEmail &&
           maps[0]['password'] == userPassword;
     }
@@ -40,6 +46,11 @@ class UserDao {
 
   Future<void> logout() async {
     final db = await DatabaseHelper().database;
-    await db!.delete('user');
+    await db!.update(
+      'user',
+      {'logged': 'false'},
+      where: 'logged = ?',
+      whereArgs: ['true'],
+    );
   }
 }

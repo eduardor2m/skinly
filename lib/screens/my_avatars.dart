@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:skinly/data/dao/avatar_dao.dart';
+import 'package:skinly/data/dao/user_dao.dart';
 import 'package:skinly/data/models/avatar_model.dart';
 import 'package:skinly/shared/avatar_grid.dart';
+
+import '../widgets/primary_button_widget.dart';
 
 class MyAvatarsScreen extends StatefulWidget {
   const MyAvatarsScreen({Key? key}) : super(key: key);
@@ -15,19 +18,23 @@ class _MyAvatarsScreenState extends State<MyAvatarsScreen> {
   late Future<List<AvatarModel>> unsavedAvatars;
   String userName = '';
 
+  Future<void> logout() async {
+    // await UserDao().logout();
+    Navigator.pushReplacementNamed(context, '/welcome');
+  }
+
   buildGridView(avatars, route, message) {
     return FutureBuilder<List<AvatarModel>>(
-      future: avatars,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return (snapshot.data?.length == 0)
-            ? showInstructionMessage(message, userName)
-            : createAvatarGrid(snapshot.data, route);
-        }
+        future: avatars,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return (snapshot.data?.length == 0)
+                ? showInstructionMessage(message, userName)
+                : createAvatarGrid(snapshot.data, route);
+          }
 
-        return Center(child: CircularProgressIndicator());
-      }
-    );
+          return Center(child: CircularProgressIndicator());
+        });
   }
 
   @override
@@ -83,6 +90,27 @@ class _MyAvatarsScreenState extends State<MyAvatarsScreen> {
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           color: Color(0xff0077B6),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  logout();
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    children: [
+                      Icon(Icons.exit_to_app,
+                          color: Color.fromARGB(255, 182, 0, 9)),
+                      Text(
+                        'Sair',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Color.fromARGB(255, 182, 0, 9),
                         ),
                       ),
                     ],

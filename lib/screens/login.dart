@@ -1,37 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:skinly/data/dao/user_dao.dart';
-import 'package:skinly/data/models/user_model.dart';
 import 'package:skinly/widgets/input_widget.dart';
 import 'package:skinly/widgets/primary_button_widget.dart';
 
-class WelcomeScreen extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   @override
-  _WelcomeScreenState createState() => _WelcomeScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final userNameController = TextEditingController();
   final userEmailController = TextEditingController();
   final userPasswordController = TextEditingController();
 
-  Future<void> saveUser() async {
-    String userName = userNameController.text;
+  Future<void> handleLogin() async {
     String userEmail = userEmailController.text;
     String userPassword = userPasswordController.text;
 
-    var user = UserModel(
-        name: userName,
-        email: userEmail,
-        password: userPassword,
-        logged: 'true');
+    var res = await UserDao().login(userEmail, userPassword);
 
-    await UserDao().insertUser(user);
-    Navigator.pushReplacementNamed(context, '/login', arguments: userName);
+    if (res == false) {
+      Navigator.pushNamed(context, '/welcome');
+    } else
+      Navigator.pushReplacementNamed(context, '/my-avatars',
+          arguments: userEmail);
   }
 
-  Future<void> handleLogin() async {
-    Navigator.pushReplacementNamed(context, '/login');
+  Future<void> handleRegister() async {
+    Navigator.pushReplacementNamed(context, '/welcome');
   }
 
   @override
@@ -59,16 +55,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ],
                 ),
                 SizedBox(height: 80),
-                Text('Efetue o cadastro para continuar',
+                Text('Efetue o login para continuar',
                     style: TextStyle(fontSize: 18)),
                 SizedBox(height: 20),
                 Form(
                   key: _formKey,
                   child: Column(
                     children: [
-                      InputWidget(
-                          label: 'Seu nome', controller: userNameController),
-                      SizedBox(height: 10),
                       InputWidget(
                           label: 'Seu email', controller: userEmailController),
                       SizedBox(height: 10),
@@ -79,18 +72,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       PrimaryButtonWidget(
                         action: () {
                           if (_formKey.currentState!.validate()) {
-                            saveUser();
+                            handleLogin();
                           }
                         },
-                        text: 'Cadastrar',
+                        text: 'Entrar',
                         icon: Icon(Icons.chevron_right_rounded),
                       ),
                       SizedBox(height: 10),
                       PrimaryButtonWidget(
                         action: () {
-                          handleLogin();
+                          handleRegister();
                         },
-                        text: 'Login',
+                        text: 'Cadastrar',
                         icon: Icon(Icons.chevron_right_rounded),
                       ),
                     ],

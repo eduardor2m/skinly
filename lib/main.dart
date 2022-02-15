@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:skinly/screens/choose_model.dart';
 import 'package:skinly/screens/export.dart';
+import 'package:skinly/screens/login.dart';
 import 'package:skinly/screens/my_avatars.dart';
 import 'package:skinly/screens/splash.dart';
 import 'package:skinly/screens/welcome.dart';
@@ -18,6 +19,7 @@ void main() {
       routes: {
         '/splash': (context) => SplashScreen(),
         '/welcome': (context) => WelcomeScreen(),
+        '/login': (context) => LoginScreen(),
         '/my-avatars': (context) => MyAvatarsScreen(),
         '/choose-model': (context) => ModelsScreen(),
         '/export': (context) => ExportScreen(),
@@ -33,6 +35,7 @@ class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

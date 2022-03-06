@@ -4,8 +4,9 @@ import 'package:skinly/screens/choose_model.dart';
 import 'package:skinly/screens/export.dart';
 import 'package:skinly/screens/login.dart';
 import 'package:skinly/screens/my_avatars.dart';
+import 'package:skinly/screens/about.dart';
 import 'package:skinly/screens/splash.dart';
-import 'package:skinly/screens/welcome.dart';
+import 'package:skinly/screens/signup.dart';
 import 'package:skinly/screens/avatar_informations.dart';
 import 'package:skinly/screens/build_avatar.dart';
 import 'package:skinly/screens/save_avatar.dart';
@@ -18,7 +19,7 @@ void main() {
       initialRoute: '/splash',
       routes: {
         '/splash': (context) => SplashScreen(),
-        '/welcome': (context) => WelcomeScreen(),
+        '/signup': (context) => SignupScreen(),
         '/login': (context) => LoginScreen(),
         '/my-avatars': (context) => MyAvatarsScreen(),
         '/choose-model': (context) => ModelsScreen(),
@@ -26,6 +27,7 @@ void main() {
         '/avatar-informations': (context) => AvatarInformationsScreen(),
         '/build-avatar': (context) => BuildAvatarScreen(),
         '/save-avatar': (context) => SaveAvatarScreen(),
+        '/about': (context) => AboutScreen(),
       },
     ),
   );

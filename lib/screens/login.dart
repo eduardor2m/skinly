@@ -20,14 +20,14 @@ class _LoginScreenState extends State<LoginScreen> {
     var res = await UserDao().login(userEmail, userPassword);
 
     if (res == false) {
-      Navigator.pushNamed(context, '/welcome');
-    } else
-      Navigator.pushReplacementNamed(context, '/my-avatars',
-          arguments: userEmail);
+      Navigator.pushNamed(context, '/signup');
+    } else {
+      Navigator.pushReplacementNamed(context, '/my-avatars');
+    }
   }
 
   Future<void> handleRegister() async {
-    Navigator.pushReplacementNamed(context, '/welcome');
+    Navigator.pushReplacementNamed(context, '/signup');
   }
 
   @override

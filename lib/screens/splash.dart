@@ -15,17 +15,17 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.delayed(Duration(milliseconds: 1500), () async {
       var userName = await UserDao().getName();
+
       if (userName != null) {
         var user = await UserDao().getUser(userName.toString());
 
         if (user.logged == 'true') {
-          Navigator.pushReplacementNamed(context, '/my-avatars',
-              arguments: userName);
+          Navigator.pushReplacementNamed(context, '/my-avatars');
         } else if (user.logged == "false") {
           Navigator.pushReplacementNamed(context, '/login');
         }
       } else {
-        Navigator.pushReplacementNamed(context, '/welcome');
+        Navigator.pushReplacementNamed(context, '/signup');
       }
     });
   }

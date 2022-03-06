@@ -14,7 +14,7 @@ class MyAvatarsScreen extends StatefulWidget {
 class _MyAvatarsScreenState extends State<MyAvatarsScreen> {
   late Future<List<AvatarModel>> savedAvatars;
   late Future<List<AvatarModel>> unsavedAvatars;
-  String userName = '';
+  late Future<String?> userName;
 
   Future<void> logout() async {
     await UserDao().logout();
@@ -40,12 +40,11 @@ class _MyAvatarsScreenState extends State<MyAvatarsScreen> {
     super.initState();
     savedAvatars = AvatarDao().loadSavedAvatars();
     unsavedAvatars = AvatarDao().loadUnsavedAvatars();
+    userName = UserDao().getName();
   }
 
   @override
   Widget build(BuildContext context) {
-    userName = ModalRoute.of(context)!.settings.arguments as String;
-
     return Material(
       child: DefaultTabController(
         length: 2,
@@ -122,6 +121,10 @@ class _MyAvatarsScreenState extends State<MyAvatarsScreen> {
               buildGridView(savedAvatars, '/export', 'personagens salvos'),
               buildGridView(unsavedAvatars, '/build-avatar', 'rascunhos'),
             ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => Navigator.pushNamed(context, '/about'),
+            child: Icon(Icons.info_outline),
           ),
         ),
       ),

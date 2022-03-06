@@ -4,12 +4,12 @@ import 'package:skinly/data/models/user_model.dart';
 import 'package:skinly/widgets/input_widget.dart';
 import 'package:skinly/widgets/primary_button_widget.dart';
 
-class WelcomeScreen extends StatefulWidget {
+class SignupScreen extends StatefulWidget {
   @override
-  _WelcomeScreenState createState() => _WelcomeScreenState();
+  _SignupScreenState createState() => _SignupScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final userNameController = TextEditingController();
   final userEmailController = TextEditingController();
@@ -27,7 +27,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         logged: 'true');
 
     await UserDao().insertUser(user);
-    Navigator.pushReplacementNamed(context, '/login', arguments: userName);
+    Navigator.pushReplacementNamed(context, '/my-avatars');
   }
 
   Future<void> handleLogin() async {
